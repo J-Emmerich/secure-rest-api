@@ -1,6 +1,5 @@
 const requiredParam = require("../helpers/required-param");
 
-
 // This function returns a valid user independently of the database.
 async function makeUser({
   // id,
@@ -16,7 +15,6 @@ async function makeUser({
     };
     return Object.freeze(user);
   } catch (err) {
-    console.log("here");
     return err.message;
   }
 }
