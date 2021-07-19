@@ -12,11 +12,14 @@
         "ecmaVersion": 12
     },
     "rules": {
+        "import/prefer-default-export" : "off",
         "prettier/prettier": [
             "error",
             {
-              "endOfLine": "auto"
+              "endOfLine": "auto",
+              "export": "ana"            
             }
+            
           ],
         "no-console":"off",
         "no-unused-vars": "warn"
