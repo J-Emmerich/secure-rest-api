@@ -1,6 +1,9 @@
 /* eslint-disable no-use-before-define */
 
-const { InvalidTypeError, RequiredParameterError } = require("../helpers/error");
+const {
+  InvalidTypeError,
+  RequiredParameterError,
+} = require("../helpers/error");
 
 // This function returns a valid user independently of the database.
 async function makeUser({ id, name = "anonymous", dateOfRegister } = {}) {
