@@ -1,21 +1,29 @@
-const requiredParam = require("../helpers/required-param");
+/* eslint-disable no-use-before-define */
+
+const { InvalidTypeError, RequiredParameterError } = require("../helpers/error");
 
 // This function returns a valid user independently of the database.
-async function makeUser({
-  // id,
-  id = requiredParam("id"),
-  name = "anonymous",
-  dateOfRegister = requiredParam("date of register"),
-} = {}) {
+async function makeUser({ id, name = "anonymous", dateOfRegister } = {}) {
   try {
+    // eslint-disable-next-line eqeqeq
+    if (id == undefined) throw new RequiredParameterError(id);
+    // eslint-disable-next-line eqeqeq
+    if (dateOfRegister == undefined) throw new RequiredParameterError(id);
+    const validId = isString(id);
+    const validName = isString(name);
+
     const user = {
-      id,
-      name,
+      id: validId,
+      name: validName,
       dateOfRegister,
     };
     return Object.freeze(user);
   } catch (err) {
     return err.message;
+  }
+  function isString(rawId) {
+    if (typeof rawId !== "string") throw new InvalidTypeError(rawId);
+    return rawId;
   }
 }
 
