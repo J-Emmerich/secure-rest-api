@@ -3,7 +3,7 @@ class RequiredParameterError extends Error {
     super(`${param} can not be null or undefined.`);
     this.name = "RequiredParameterError";
   }
-};
+}
 
 class InvalidTypeError extends Error {
   constructor(param) {
