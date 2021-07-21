@@ -18,10 +18,10 @@ Partidas y resultados
         and the success rate of each one
 
 Data layer: has 3 layers
-    - Mongoose/Sequelize Models
-    - Controller -> Directly deals with the ORM
-    - Business logic -> Fabric Function that exports a correct object to the controller. 
-    - There's a index file that builds the factory and makes it ready to use. 
+    - Mongoose/Sequelize Models - Implementation Only, no business logic. Nothing on the code should rely on this. It's a dependency that will be injected
+    - Controller/Adapter -> Directly deals with the ORM - This will call the models, it's what my code will call, it's methods should be the same always. 
+    - Business logic -> Fabric Function that exports a correct object to the controller/Adapter. 
+    
 
 
 URL’s:
