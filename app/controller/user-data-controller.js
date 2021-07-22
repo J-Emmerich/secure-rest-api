@@ -1,8 +1,9 @@
 /*
 This is the client API that calls the (Adapter)- DataLayer
+This are functions that deals with the entities. 
+It's paired with user-controller. Both are on the same architectural level.
 */
 
-const adapter = "..data/database-adapter";
 const { v4: uuidv4 } = require("uuid");
 const getCurrentTime = require("../helpers/get-current-time");
 const userFabric = require("../data/user-fabric");
@@ -15,7 +16,7 @@ async function createUser(database) {
     user = await database.create(user);
     return user;
   } catch (err) {
-    return `We Found an error! :  ${err.message}`;
+    console.log("We Found an error! : ", err.message);
   }
 }
 

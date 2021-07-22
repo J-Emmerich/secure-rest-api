@@ -1,4 +1,14 @@
 /*
+Clean architecture principle is: 
+        Dependency rule. ---It always moves inward
+
+
+                middlewares and routes
+                adapters/dataAccess - require controllers/dependency injection database     
+                    controllers(game rules, require user fabric, dependency injection -adapter)
+                        -----userFabric(entity)        
+
+
 Partidas y resultados
     - Business logic game : 
         The game is made with two dices

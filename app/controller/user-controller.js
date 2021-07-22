@@ -1,1 +1,1 @@
-// Receives an http request and calls data-controller.
+// Establishes the rules of the game.
