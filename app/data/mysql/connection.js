@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const { username, database, host, password } = require("../config/config");
 
 // Create the connection instance, freezing auto table-naming.
-const sequelize = new Sequelize(database, username, password, {
+const connection = new Sequelize(database, username, password, {
   host,
   dialect: "mysql",
   define: {
@@ -10,4 +10,4 @@ const sequelize = new Sequelize(database, username, password, {
   }
 });
 
-module.exports = sequelize;
+module.exports = connection;

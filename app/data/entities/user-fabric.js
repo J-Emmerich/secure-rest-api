@@ -1,7 +1,7 @@
 const {
   InvalidTypeError,
   RequiredParameterError
-} = require("../helpers/error");
+} = require("../../helpers/error");
 
 // This function returns a valid user independently of the database.
 async function makeUser({ id, name = "anonymous", dateOfRegister } = {}) {
@@ -12,11 +12,11 @@ async function makeUser({ id, name = "anonymous", dateOfRegister } = {}) {
     if (dateOfRegister == undefined) throw new RequiredParameterError(id);
     const validId = isString(id);
     const validName = isString(name);
-
+    const validTime = isString(dateOfRegister);
     const user = {
       id: validId,
       name: validName,
-      dateOfRegister
+      dateOfRegister: validTime
     };
     return Object.freeze(user);
   } catch (err) {

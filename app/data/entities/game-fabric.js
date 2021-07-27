@@ -1,8 +1,12 @@
+const { v4: uuidv4 } = require("uuid");
+
 async function play() {
   const dice = getRandomInt(1, 7);
   const dice2 = getRandomInt(1, 7);
   const result = gameResult(dice, dice2);
+  const id = uuidv4();
   const game = {
+    id,
     dice,
     dice2,
     result
