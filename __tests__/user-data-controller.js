@@ -6,7 +6,7 @@ describe("Crud operations", () => {
     const db = {
       create(user) {
         return `${user.name} was created:::: ${user}`;
-      },
+      }
     };
 
     const user = await createUser(db);

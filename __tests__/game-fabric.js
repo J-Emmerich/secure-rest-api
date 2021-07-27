@@ -8,7 +8,7 @@ describe("The game is played with two dices", () => {
   });
   test("the result is returned correctly", async () => {
     const result = await gameResult(6, 1);
-    const result2 = await gameResult(5, 1);
+    const result2 = await gameResult("c", null);
     expect(result).toBe(true);
     expect(result2).toBe(false);
   });

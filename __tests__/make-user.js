@@ -1,5 +1,5 @@
 const { describe, expect, test } = require("@jest/globals");
-const makeUser = require("../app/data/user-fabric");
+const makeUser = require("../app/entities/user-fabric");
 const { RequireParamError, InvalidTypeError } = require("../app/helpers/error");
 
 describe("Create a valid object-user", () => {
@@ -7,7 +7,7 @@ describe("Create a valid object-user", () => {
     const mockUser = {
       id: "12",
       name: "Jay",
-      dateOfRegister: "13/23/34",
+      dateOfRegister: "13/23/34"
     };
     const user = await makeUser(mockUser);
     expect(user).not.toBeNull();
@@ -17,7 +17,7 @@ describe("Create a valid object-user", () => {
     const mockUser = {
       id: "12",
       name: "Jay",
-      dateOfRegister: "13/23/34",
+      dateOfRegister: "13/23/34"
     };
     const user = await makeUser(mockUser);
     expect(user).toBeFrozen();
@@ -26,14 +26,14 @@ describe("Create a valid object-user", () => {
     const mockUser = {
       id: "1",
       name: "Jay",
-      dateOfRegister: "13/23/34",
+      dateOfRegister: "13/23/34"
     };
     const user = await makeUser(mockUser);
     expect(user).toEqual(
       expect.objectContaining({
         id: expect.any(String),
         name: expect.any(String),
-        dateOfRegister: expect.any(String),
+        dateOfRegister: expect.any(String)
       })
     );
   });
@@ -63,14 +63,14 @@ expect.extend({
       // typeof is not safe. Must explicitidly check null values and arrays too.
       return {
         message: "Is Object",
-        pass: true,
+        pass: true
       };
     }
     return {
       message: () => `This is not an object, it's::::${typeof expect}`,
-      pass: false,
+      pass: false
     };
-  },
+  }
 });
 
 expect.extend({
@@ -78,12 +78,12 @@ expect.extend({
     const result = Object.isFrozen(expected); // IsFrozen is not safe as it returns true if the argument is not of type object
     if (result) {
       return {
-        pass: true,
+        pass: true
       };
     }
     return {
       message: () => "This object is not frozen.",
-      pass: false,
+      pass: false
     };
-  },
+  }
 });
