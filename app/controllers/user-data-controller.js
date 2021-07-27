@@ -16,14 +16,13 @@ async function createUser(name) {
     const dateOfRegister = await getCurrentTime();
     console.log(`The date of register is: ${dateOfRegister}`);
     let user = await userFabric({ id, name, dateOfRegister });
-    console.log("This is the user before db ", user);
-
-    user = await create(user);
-    console.log("This is the user ", user);
-
-    return user;
+    if (!(user instanceof Error)) {
+      user = await create(user);
+      return user;
+    }
+    return user.message;
   } catch (err) {
-    console.log("We Found an error! : ", err.message);
+    return err.message;
   }
 }
 

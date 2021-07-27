@@ -1,5 +1,5 @@
 const { describe, expect, test } = require("@jest/globals");
-const createUser = require("../app/controller/user-data-access");
+const createUser = require("../app/controllers/user-data-controller");
 
 describe("Crud operations", () => {
   test("Returns an user", async () => {

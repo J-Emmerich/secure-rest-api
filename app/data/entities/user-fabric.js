@@ -1,8 +1,25 @@
 const {
   InvalidTypeError,
-  RequiredParameterError
+  RequiredParameterError,
 } = require("../../helpers/error");
 
+function isString(rawId) {
+  if (typeof rawId !== "string" && rawId !== null)
+    throw new InvalidTypeError(rawId, "string");
+  return rawId;
+}
+function nameValidation(notValidatedName) {
+  if (
+    notValidatedName === undefined ||
+    notValidatedName === null ||
+    notValidatedName === ""
+  ) {
+    const validName = "anonymous";
+    return validName;
+  }
+  const validName = notValidatedName;
+  return validName;
+}
 // This function returns a valid user independently of the database.
 async function makeUser({ id, name = "anonymous", dateOfRegister } = {}) {
   try {
@@ -11,20 +28,16 @@ async function makeUser({ id, name = "anonymous", dateOfRegister } = {}) {
     // eslint-disable-next-line eqeqeq
     if (dateOfRegister == undefined) throw new RequiredParameterError(id);
     const validId = isString(id);
-    const validName = isString(name);
+    const validName = nameValidation(isString(name));
     const validTime = isString(dateOfRegister);
     const user = {
       id: validId,
       name: validName,
-      dateOfRegister: validTime
+      dateOfRegister: validTime,
     };
     return Object.freeze(user);
   } catch (err) {
-    return err.message;
-  }
-  function isString(rawId) {
-    if (typeof rawId !== "string") throw new InvalidTypeError(rawId);
-    return rawId;
+    return err;
   }
 }
 

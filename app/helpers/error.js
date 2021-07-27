@@ -6,8 +6,8 @@ class RequiredParameterError extends Error {
 }
 
 class InvalidTypeError extends Error {
-  constructor(param) {
-    super(`${param} can't be of type ${typeof param}`);
+  constructor(param, expected) {
+    super(`${typeof param} is not accepted. You should use ${expected} `);
     this.name = "InvalidTypeError";
   }
 }

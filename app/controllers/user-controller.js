@@ -6,7 +6,7 @@ It has no idea which database is being used.
 const { createUser } = require("./user-data-controller");
 
 async function register(req, res) {
-  const name = req.name;
+  const { name } = req.body;
   const user = await createUser(name);
   res.json(user);
 }

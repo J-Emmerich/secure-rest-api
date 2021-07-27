@@ -9,6 +9,7 @@ const { PORT } = process.env;
 // Start the database
 connection();
 
+app.use(express.json());
 app.use("/players", router);
 
 app.listen(PORT, () => {

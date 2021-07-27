@@ -6,7 +6,10 @@ async function getCurrentTime() {
     const minutes = date.getMinutes();
     const day = date.getDate();
     const month = date.getMonth() + 1;
-    return { hour, minutes, day, month };
+    const year = date.getFullYear();
+    const seconds = date.getSeconds();
+    const dateAsString = `${day}/${month}/${year} ${hour}:${minutes}:${seconds}`;
+    return dateAsString;
   } catch (err) {
     return err.message;
   }
