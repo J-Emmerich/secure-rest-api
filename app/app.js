@@ -7,6 +7,7 @@ const app = express();
 const { PORT } = process.env;
 
 // Start the database
+console.log(connection);
 connection();
 
 app.use(express.json());

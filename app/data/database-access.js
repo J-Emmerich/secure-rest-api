@@ -6,7 +6,7 @@
 
 const { DB } = process.env;
 
-//Who start the connection with the database? -App.js or Server.js?
+// Who start the connection with the database? -App.js or Server.js?
 // const { connection } = require("./connection-handler")[DB];
 const { connection } = require("./connection-handler")[DB];
 const database = require("./connection-handler")[DB];

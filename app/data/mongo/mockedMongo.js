@@ -1,7 +1,3 @@
-const connection = function () {
-  console.log("MongoDB is now connected");
-};
-
 async function createB(user) {
   console.log(
     `We ***** from mongoose *****
@@ -10,4 +6,4 @@ async function createB(user) {
   );
 }
 
-module.exports = { createB, connection };
+module.exports = { createB };
