@@ -9,7 +9,7 @@ const getCurrentTime = require("../helpers/get-current-time");
 const userFabric = require("../data/entities/user-fabric");
 // Requires the database adapter-access layer that decides which database to use.
 const { methods } = require("../data/database-access");
-// const methods = require("../data/mongo/mongo-methods");
+
 
 async function createUser(name) {
   try {

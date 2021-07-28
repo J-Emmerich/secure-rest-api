@@ -1,7 +1,7 @@
 const mysql = {
   database: "devrest",
   username: "root",
-  password: "1234",
+  password: process.env.MYSQLPASS,
   host: "localhost",
 };
 

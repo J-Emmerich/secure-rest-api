@@ -4,7 +4,7 @@
 
 const { DB } = process.env;
 const database = require("./connection-handler")[DB];
-const methods = require("./mongo/mongo-methods");
+const methods = require("./database-methods")[DB];
 
 database.methods = methods;
 
