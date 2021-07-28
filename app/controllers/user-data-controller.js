@@ -8,16 +8,16 @@ const { v4: uuidv4 } = require("uuid");
 const getCurrentTime = require("../helpers/get-current-time");
 const userFabric = require("../data/entities/user-fabric");
 // Requires the database adapter-access layer that decides which database to use.
-const { create } = require("../data/database-access");
+const { methods } = require("../data/database-access");
+// const methods = require("../data/mongo/mongo-methods");
 
 async function createUser(name) {
   try {
     const id = uuidv4();
     const dateOfRegister = await getCurrentTime();
-    console.log(`The date of register is: ${dateOfRegister}`);
     let user = await userFabric({ id, name, dateOfRegister });
     if (!(user instanceof Error)) {
-      user = await create(user);
+      user = await methods.create(user);
       return user;
     }
     return user.message;

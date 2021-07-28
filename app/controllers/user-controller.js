@@ -8,6 +8,7 @@ const { createUser } = require("./user-data-controller");
 async function register(req, res) {
   const { name } = req.body;
   const user = await createUser(name);
+  console.log(user);
   res.json(user);
 }
 

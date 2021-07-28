@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node app/app.js",
+    "dev": "nodemon app/app.js",
     "test": "jest --verbose=true"
   },
   "keywords": [],

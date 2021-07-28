@@ -1,12 +1,12 @@
 process.stdin.resume();
 const mongoose = require("mongoose");
+
 const user = process.env.USER;
 const password = process.env.PASSWORD;
-const uri =
-  `mongodb+srv://${user}:${password}@base.b4wyc.mongodb.net/Base?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${user}:${password}@base.b4wyc.mongodb.net/Base?retryWrites=true&w=majority`;
 const options = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 };
 
 const mongoDB = {
@@ -20,11 +20,10 @@ const mongoDB = {
       console.log("Disconnected from Mongoose");
     });
     process.on("SIGINT", () => {
-      mongoose.connection.close(
-        console.log("The connection with MongoDB was closed.")
-      );
+      mongoose.connection.close(console.log("Closing DB"));
+      process.exit();
     });
-  }
+  },
 };
 
 module.exports = mongoDB;

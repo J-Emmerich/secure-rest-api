@@ -3,12 +3,9 @@
 // the connection-handler and exports a object with the methods.
 
 const { DB } = process.env;
-let database = require("./connection-handler")[DB];
+const database = require("./connection-handler")[DB];
 const methods = require("./mongo/mongo-methods");
+
 database.methods = methods;
-database.start = function () {
-  database.connection();
-  return database;
-};
 
 module.exports = database;

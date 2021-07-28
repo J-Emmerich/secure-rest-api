@@ -1,19 +1,13 @@
 require("dotenv").config();
 
-const database = require("./data/database-access");
 const express = require("express");
 const router = require("./routes/players");
-const { createUser } = require("./controllers/user-data-controller");
+const { connection } = require("./data/database-access");
 
 const app = express();
 const { PORT } = process.env;
-
-async function start() {
-  await database.start();
-  await createUser("Lolipop");
-}
-
-start();
+// Calls the db connection
+connection();
 
 app.use(express.json());
 app.use("/players", router);
