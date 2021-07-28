@@ -1,7 +1,9 @@
 process.stdin.resume();
 const mongoose = require("mongoose");
+const user = process.env.USER;
+const password = process.env.PASSWORD;
 const uri =
-  "mongodb+srv://admin:1234@base.b4wyc.mongodb.net/Base?retryWrites=true&w=majority";
+  `mongodb+srv://${user}:${password}@base.b4wyc.mongodb.net/Base?retryWrites=true&w=majority`;
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
