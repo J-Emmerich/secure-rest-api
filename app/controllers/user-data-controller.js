@@ -10,7 +10,6 @@ const userFabric = require("../data/entities/user-fabric");
 // Requires the database adapter-access layer that decides which database to use.
 const { methods } = require("../data/database-access");
 
-
 async function createUser(name) {
   try {
     const id = uuidv4();
