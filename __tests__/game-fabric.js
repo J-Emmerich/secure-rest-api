@@ -1,5 +1,5 @@
 const { describe, expect, test } = require("@jest/globals");
-const { play, gameResult } = require("../app/entities/game-fabric");
+const { play, gameResult } = require("../app/data/entities/game-fabric");
 
 describe("The game is played with two dices", () => {
   test("A random number is called", async () => {
@@ -21,14 +21,13 @@ expect.extend({
       return {
         message: () =>
           `expected ${received} not to be within range ${floor} - ${ceiling}`,
-        pass: true
-      };
-    } else {
-      return {
-        message: () =>
-          `expected ${received} to be within range ${floor} - ${ceiling}`,
-        pass: false
+        pass: true,
       };
     }
-  }
+    return {
+      message: () =>
+        `expected ${received} to be within range ${floor} - ${ceiling}`,
+      pass: false,
+    };
+  },
 });

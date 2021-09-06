@@ -1,26 +1,16 @@
-const { User, Game } = require("./models/index");
+const { Player, Game } = require("./models/index");
 
-async function create(user) {
+async function create(player) {
   try {
-    const newUser = await User.create(user);
-    return newUser.toJSON();
+    const newPlayer = await Player.create(player);
+    return newPlayer.toJSON();
   } catch (err) {
     return err;
   }
 }
 
-async function createGame({ id, diceOne, diceTwo, result, UserId }) {
-  try {
-    const newGame = await Game.create({ id, diceOne, diceTwo, result, UserId });
-    return newGame;
-  } catch (err) {
-    return err;
-  }
+async function getAllPlayers() {
+  // return all players and their win rate
 }
 
-async function find() {
-  const users = await User.findAll();
-  return JSON.stringify(users);
-}
-
-module.exports = { create, find, createGame };
+module.exports = { create, getAllPlayers };

@@ -29,6 +29,8 @@
         "max-classes-per-file": "off",
         "no-new": "off",
         "no-dynamic-require": "off",
+        "import/no-dynamic-require": "off",
+        "no-param-reassign": "off"
         }
     }
         

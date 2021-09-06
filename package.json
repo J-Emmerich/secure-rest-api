@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app/app.js",
     "dev": "nodemon app/app.js",
-    "test": "jest --verbose=true"
+    "test": "jest --verbose=true",
+    "lint": "eslint --fix --ext .js,.jsx ."
   },
   "keywords": [],
   "author": "",
@@ -39,4 +40,5 @@
     "prettier": "^2.3.2",
     "sequelize-cli": "^6.2.0"
   }
+  
 }

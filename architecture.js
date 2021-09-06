@@ -1,4 +1,8 @@
 /*
+
+CHAT 8 de octubre!
+
+
 Clean architecture principle is: 
         Dependency rule. ---It always moves inward
 

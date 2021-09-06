@@ -1,9 +1,9 @@
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../connection");
 
-class User extends Model {}
+class Player extends Model {}
 
-User.init(
+Player.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -21,8 +21,8 @@ User.init(
   {
     sequelize,
     timestamps: false,
-    modelName: "User",
+    modelName: "Player",
   }
 );
 
-module.exports = User;
+module.exports = Player;

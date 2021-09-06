@@ -1,3 +1,5 @@
+// This file validates the object that goes into the DB. All validation ocurrs here, not in DB-layer.
+
 const {
   InvalidTypeError,
   RequiredParameterError,
@@ -20,8 +22,8 @@ function nameValidation(notValidatedName) {
   const validName = notValidatedName;
   return validName;
 }
-// This function returns a valid user independently of the database.
-async function makeUser({ id, name = "anonymous", dateOfRegister } = {}) {
+// This function returns a valid player independently of the database.
+async function makePlayer({ id, name = "anonymous", dateOfRegister } = {}) {
   try {
     // eslint-disable-next-line eqeqeq
     if (id == undefined) throw new RequiredParameterError(id);
@@ -30,18 +32,18 @@ async function makeUser({ id, name = "anonymous", dateOfRegister } = {}) {
     const validId = isString(id);
     const validName = nameValidation(isString(name));
     const validTime = isString(dateOfRegister);
-    const user = {
+    const player = {
       id: validId,
       name: validName,
       dateOfRegister: validTime,
     };
-    return Object.freeze(user);
+    return Object.freeze(player);
   } catch (err) {
     return err;
   }
 }
 
-module.exports = makeUser;
+module.exports = makePlayer;
 /*
 
     Business logic player : 

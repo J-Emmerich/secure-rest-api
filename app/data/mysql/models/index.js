@@ -1,12 +1,12 @@
-const User = require("./User");
+const Player = require("./Player");
 const Game = require("./Game");
 
 const models = {
-  User,
+  Player,
   Game,
 };
 
-User.hasMany(Game);
-Game.belongsTo(User);
+Player.hasMany(Game);
+Game.belongsTo(Player);
 
 module.exports = models;
