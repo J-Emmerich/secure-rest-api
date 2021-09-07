@@ -6,6 +6,10 @@ const playerSchema = new mongoose.Schema(
     id: String,
     name: String,
     dateOfRegister: String,
+    victoryRatePercentage: {
+      type: Number,
+      default: 0,
+    },
     games: [
       {
         id: String,

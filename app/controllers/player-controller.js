@@ -1,14 +1,15 @@
 /*
-This is the file that decides what to do with the request.
-It has no idea which database is being used. 
+This file handle request and response objects.
 */
 
 const {
   createPlayerInDB,
   getPlayersFromDB,
-  getOnePlayerInDB,
+  getOnePlayerGamesInDB,
   updatePlayerNameInDB,
-  makePlayerPlayOnce,
+  makePlayerPlayOnceInDB,
+  deletePlayerGamesFromDB,
+  getTopRankingPlayerFromDB,
 } = require("./player-data-controller");
 
 async function registerNewPlayer(req, res) {
@@ -31,7 +32,7 @@ async function getAllPlayers(req, res) {
   }
 }
 
-async function updatePlayerName(req, res) {
+async function updateOnePlayerName(req, res) {
   try {
     const playerId = req.body.id;
     const playerName = req.body.name;
@@ -44,26 +45,65 @@ async function updatePlayerName(req, res) {
   }
 }
 
-async function getOnePlayer(req, res) {
+async function getOnePlayerGames(req, res) {
   const playerId = req.params.id;
-  const player = await getOnePlayerInDB(playerId);
+  const player = await getOnePlayerGamesInDB(playerId);
   res.status(200).json(player);
 }
 
 async function playOneGame(req, res) {
   try {
     const playerId = req.params.id;
-    const playerGame = await makePlayerPlayOnce(playerId);
+    const playerGame = await makePlayerPlayOnceInDB(playerId);
     res.status(201).json(playerGame);
   } catch (err) {
     console.log(err.message);
   }
 }
 
+async function deletePlayerGames(req, res) {
+  try {
+    const playerId = req.params.id;
+    const result = await deletePlayerGamesFromDB(playerId);
+    res.status(200).json(result);
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+async function getAllPlayersRanking(req, res) {
+  try {
+    const playerRankings = await getPlayersFromDB({ short: true });
+    res.status(200).json(playerRankings);
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+async function getPlayerHigherVictoryRate(req, res) {
+  try {
+    const topRanking = await getTopRankingPlayerFromDB();
+    res.status(200).json(topRanking);
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+async function getPlayerLowerVictoryRate(req, res) {
+  try {
+    const lowerRanking = await getTopRankingPlayerFromDB({ reverse: true });
+    res.status(200).json(lowerRanking);
+  } catch (err) {
+    console.log(err.message);
+  }
+}
 module.exports = {
   registerNewPlayer,
   getAllPlayers,
-  updatePlayerName,
-  getOnePlayer,
+  updateOnePlayerName,
+  getOnePlayerGames,
   playOneGame,
+  deletePlayerGames,
+  getAllPlayersRanking,
+  getPlayerLowerVictoryRate,
+  getPlayerHigherVictoryRate,
 };

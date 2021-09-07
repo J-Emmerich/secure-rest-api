@@ -1,9 +1,9 @@
 /*
-This is the client API that calls the (Adapter)- DataLayer
-This are functions that deals with the entities. 
-It's one level deeper than the player controller
 
-It has no idea with DB is being used.
+This are functions that deals with the entities and call DB methods 
+It's one level deeper than the player controller
+It has no idea which DB is being used.
+
 */
 
 const { v4: uuidv4 } = require("uuid");
@@ -35,37 +35,57 @@ async function updatePlayerNameInDB(id, name) {
   return player;
 }
 
-async function getPlayersFromDB() {
+async function getPlayersFromDB({ short = false } = {}) {
   try {
-    const players = await methods.getAllPlayers();
+    const players = await methods.getAllPlayers({ short });
     return players;
   } catch (err) {
     return err.message;
   }
 }
 
-async function getOnePlayerInDB(id) {
+async function getOnePlayerGamesInDB(id) {
   try {
-    const player = await methods.findOne(id);
-    return player;
+    const playerGames = await methods.getAllGamesFromOnePlayer(id);
+    return playerGames;
   } catch (err) {
     return err.message;
   }
 }
-async function makePlayerPlayOnce(playerId) {
+async function makePlayerPlayOnceInDB(playerId) {
   try {
-    let game = await play(playerId);
-    console.log(game);
-    game = await methods.saveGame(game);
+    let game = await play(playerId); // Game object is sent with the player Id.
+    game = await methods.saveGame(game); // DB handle it accordingly (mongo save in same document, mysql in two tables with foreign key)
     return game;
   } catch (err) {
     return err.message;
   }
 }
+
+async function deletePlayerGamesFromDB(playerId) {
+  try {
+    const isDeleted = await methods.deleteGames(playerId);
+    return isDeleted;
+  } catch (err) {
+    return err.message;
+  }
+}
+
+async function getTopRankingPlayerFromDB({ reverse = false } = {}) {
+  try {
+    const topRanking = await methods.getTopRanking({ reverse });
+    return topRanking;
+  } catch (err) {
+    return err.message;
+  }
+}
+
 module.exports = {
   createPlayerInDB,
   getPlayersFromDB,
   updatePlayerNameInDB,
-  getOnePlayerInDB,
-  makePlayerPlayOnce,
+  getOnePlayerGamesInDB,
+  makePlayerPlayOnceInDB,
+  deletePlayerGamesFromDB,
+  getTopRankingPlayerFromDB,
 };
