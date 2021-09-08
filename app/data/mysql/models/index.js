@@ -6,10 +6,13 @@ const Game = require("./Game");
 
 const models = {
   Player,
-  Game,
+  Game
 };
 
 Player.hasMany(Game);
 Game.belongsTo(Player);
+
+Player.sync();
+Game.sync();
 
 module.exports = models;

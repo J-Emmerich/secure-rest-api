@@ -1,5 +1,5 @@
 const Player = require("./models/player");
-const calcVitoryRate = require("../../helpers/calc-victory-rate");
+const calcVictoryRate = require("../../helpers/calc-victory-rate");
 
 // Must return 1 Player
 async function create(player) {
@@ -9,7 +9,7 @@ async function create(player) {
   });
   return newPlayer;
 }
-// Must return all players
+// Must return all players and their victory rate
 async function getAllPlayers({ short = false } = {}) {
   try {
     if (short) {
@@ -52,14 +52,8 @@ async function saveGame(gameToSave) {
       { $push: { games: gameToSave } },
       { useFindAndModify: false, new: true }
     );
-    const numberOfVictories = player.games
-      .map((game) => game.result)
-      .filter((result) => result);
-    const victoryRate = await calcVitoryRate(
-      player.games.length,
-      numberOfVictories.length
-    );
-    // console.log(victoryRate);
+    const victoryRate = await calcVictoryRate(player.games);
+
     player.victoryRatePercentage = victoryRate;
     player = await player.save();
     return player;
@@ -91,7 +85,7 @@ async function getTopRanking({ reverse = false } = {}) {
     const order = reverse ? 1 : -1;
     const player = await Player.find({})
       .sort({
-        victoryRatePercentage: order,
+        victoryRatePercentage: order
       })
       .limit(1);
     return player;
@@ -108,5 +102,5 @@ module.exports = {
   saveGame,
   deleteGames,
   getAllGamesFromOnePlayer,
-  getTopRanking,
+  getTopRanking
 };
