@@ -1,17 +1,8 @@
 /*
 
 This are functions that deals with the entities and call DB methods 
-It's one level deeper than the player controller
-It has no idea which DB is being used.
+They're the "use cases" in Clean Architecture
 
-*/
-
-/* 
-Methods: 
-methods.create(player);
-Create - Must save a new player, return the player created
-methods.updateName(id, name) Must return the updated
-methods.getAllPlayers({ short }) Must
 */
 
 const { v4: uuidv4 } = require("uuid");
@@ -19,11 +10,13 @@ const getCurrentTime = require("../helpers/get-current-time");
 const playerFabric = require("../data/entities/player-fabric");
 const { play } = require("../data/entities/game-fabric");
 
-// Requires the database adapter-access layer that decides which database to use.
+// Requires the database methods, is the database-access layer that decides which database to use.
 const { methods } = require("../data/database-access");
 
 async function createPlayerInDB(name) {
   try {
+    // Find player with same name with a function find
+
     const id = uuidv4();
     const dateOfRegister = await getCurrentTime();
     let player = await playerFabric({ id, name, dateOfRegister });
@@ -38,8 +31,8 @@ async function createPlayerInDB(name) {
 }
 
 async function updatePlayerNameInDB(id, name) {
+  // Name validation function
   const player = await methods.updateName(id, name);
-  console.log("This is the update", player);
   return player;
 }
 
@@ -62,7 +55,7 @@ async function getOnePlayerGamesInDB(id) {
 }
 async function makePlayerPlayOnceInDB(playerId) {
   try {
-    let game = await play(playerId); // Game object is sent with the player Id.
+    let game = await play(playerId);
     game = await methods.saveGame(game); // DB handle it accordingly (mongo save in same document, mysql in two tables with foreign key)
     return game;
   } catch (err) {

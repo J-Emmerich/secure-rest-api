@@ -1,5 +1,6 @@
 const { Player, Game } = require("./models");
 const calcVictoryRate = require("../../helpers/calc-victory-rate");
+const assignVictoryRateToPlayer = require("../../helpers/assign-victory-rate");
 
 async function create({ id, name, dateOfRegister }) {
   try {
@@ -15,10 +16,14 @@ async function create({ id, name, dateOfRegister }) {
 }
 
 async function updateName(id, toUpdate) {
-  let player = await Player.findByPk(id);
-  player.name = toUpdate;
-  player = await player.save();
-  return player;
+  try {
+    let player = await Player.findByPk(id);
+    player.name = toUpdate;
+    player = await player.save();
+    return player;
+  } catch (err) {
+    return err;
+  }
 }
 
 async function getAllPlayers({ short = false } = {}) {
@@ -32,11 +37,7 @@ async function getAllPlayers({ short = false } = {}) {
       players = players.map((player) => player.toJSON());
       // calculate victory rate and assign to player.
       players = players.map(async (player) => {
-        const victoryRate = await calcVictoryRate(player.Games);
-        const victory = {
-          victoryRatePercentage: victoryRate,
-        };
-        Object.assign(player, victory);
+        player = await assignVictoryRateToPlayer(player);
         delete player.Games;
         return player;
       });
@@ -50,11 +51,7 @@ async function getAllPlayers({ short = false } = {}) {
 
     // Assign victory rate to the player
     players = players.map(async (player) => {
-      const victoryRate = await calcVictoryRate(player.Games);
-      const victory = {
-        victoryRatePercentage: victoryRate,
-      };
-      Object.assign(player, victory);
+      player = await assignVictoryRateToPlayer(player);
       return player;
     });
     // resolves array of promises

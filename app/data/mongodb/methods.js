@@ -3,35 +3,40 @@ const calcVictoryRate = require("../../helpers/calc-victory-rate");
 
 // Must return 1 Player
 async function create(player) {
-  const newPlayer = new Player(player);
-  await newPlayer.save((err) => {
-    if (err) console.log(`There was an error ${err}`);
-  });
-  return newPlayer;
+  try {
+    const newPlayer = new Player(player);
+    await newPlayer.save();
+    return newPlayer;
+  } catch (err) {
+    return err;
+  }
 }
 // Must return all players and their victory rate
 async function getAllPlayers({ short = false } = {}) {
   try {
     if (short) {
       const players = await Player.find({}, "id name victoryRatePercentage");
-      console.log(players);
       return players;
     }
     const players = await Player.find({});
     return players;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
 // Must return the UPDATED version of the player
 async function updateName(id, toUpdate) {
-  const updated = await Player.findOneAndUpdate(
-    { id: id },
-    { name: toUpdate },
-    { useFindAndModify: false, new: true }
-  );
-  return updated;
+  try {
+    const updated = await Player.findOneAndUpdate(
+      { id: id },
+      { name: toUpdate },
+      { useFindAndModify: false, new: true }
+    );
+    return updated;
+  } catch (err) {
+    return err;
+  }
 }
 
 // Return 1 player
@@ -40,7 +45,7 @@ async function findOne(id) {
     const player = await Player.find({ id });
     return player;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
@@ -58,25 +63,28 @@ async function saveGame(gameToSave) {
     player = await player.save();
     return player;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
 async function deleteGames(playerId) {
-  const player = await Player.findOne({ id: playerId });
-  player.victoryRatePercentage = 0;
-  player.games = [];
-  await player.save();
-  return player;
+  try {
+    const player = await Player.findOne({ id: playerId });
+    player.victoryRatePercentage = 0;
+    player.games = [];
+    await player.save();
+    return true;
+  } catch (err) {
+    return err;
+  }
 }
-
 async function getAllGamesFromOnePlayer(playerId) {
   try {
     let playerGames = await Player.findOne({ id: playerId });
     playerGames = playerGames.games;
     return playerGames;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
@@ -90,7 +98,7 @@ async function getTopRanking({ reverse = false } = {}) {
       .limit(1);
     return player;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 

@@ -13,13 +13,13 @@ const {
 
 const router = express.Router();
 
-router.post("/:id/games", playOneGame);
-router.post("/", registerNewPlayer);
+router.get("/", getAllPlayers);
 router.put("/", updateOnePlayerName);
-router.delete("/:id/games", deletePlayerGames);
+router.post("/", registerNewPlayer);
 
 router.get("/:id/games", getOnePlayerGames);
-router.get("/", getAllPlayers);
+router.post("/:id/games", playOneGame);
+router.delete("/:id/games", deletePlayerGames);
 
 router.get("/ranking", getAllPlayersRanking);
 router.get("/ranking/winner", getPlayerHigherVictoryRate);

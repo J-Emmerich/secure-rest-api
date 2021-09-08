@@ -1,5 +1,6 @@
 /*
 This file handle request and response objects.
+// Controllers in Clean Architecture
 */
 
 const {
@@ -16,7 +17,6 @@ async function registerNewPlayer(req, res) {
   try {
     const { name } = req.body;
     const player = await createPlayerInDB(name);
-    console.log("this the player created:::", player);
     res.status(201).json(player);
   } catch (err) {
     console.log(err.message);
@@ -36,8 +36,6 @@ async function updateOnePlayerName(req, res) {
   try {
     const playerId = req.body.id;
     const playerName = req.body.name;
-    console.log(playerId);
-    console.log(playerName);
     const player = await updatePlayerNameInDB(playerId, playerName);
     res.status(200).json(player);
   } catch (err) {
@@ -65,7 +63,7 @@ async function deletePlayerGames(req, res) {
   try {
     const playerId = req.params.id;
     const result = await deletePlayerGamesFromDB(playerId);
-    res.status(200).json(result);
+    res.status(204).json(result);
   } catch (err) {
     console.log(err.message);
   }
