@@ -95,5 +95,5 @@ module.exports = {
   getOnePlayerGamesInDB,
   makePlayerPlayOnceInDB,
   deletePlayerGamesFromDB,
-  getTopRankingPlayerFromDB
+  getTopRankingPlayerFromDB,
 };

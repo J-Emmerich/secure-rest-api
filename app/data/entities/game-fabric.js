@@ -24,7 +24,7 @@ async function play(playerId) {
     diceOne,
     diceTwo,
     result,
-    playerId
+    playerId,
   };
   return Object.freeze(game);
 }

@@ -3,11 +3,11 @@ const methods = require("./controllers/player-controller");
 // Methods to test in sandbox context:
 const req = {
   params: {
-    id: "ea727bd7-63a9-4c52-b51d-0b6ed8ae8614"
+    id: "ea727bd7-63a9-4c52-b51d-0b6ed8ae8614",
   },
   body: {
-    name: "Sigma X"
-  }
+    name: "Sigma X",
+  },
 };
 
 function status(param) {
@@ -16,7 +16,7 @@ function status(param) {
 }
 
 const res = {
-  json: (param) => console.log(param)
+  json: (param) => console.log(param),
 };
 
 res.status = status;

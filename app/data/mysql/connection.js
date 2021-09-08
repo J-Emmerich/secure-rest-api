@@ -1,8 +1,9 @@
 const Sequelize = require("sequelize");
-const { username, database, host, password } = require("../../config/config");
+const { mysqlConfig } = require("../../config/config");
+
+const { username, database, host, password } = mysqlConfig;
 
 // Create the connection instance, freezing auto table-naming.
-
 const mysql = new Sequelize(database, username, password, {
   host,
   dialect: "mysql",
@@ -10,7 +11,5 @@ const mysql = new Sequelize(database, username, password, {
     freezeTableName: true,
   },
 });
-
 mysql.authenticate();
-
 module.exports = mysql;

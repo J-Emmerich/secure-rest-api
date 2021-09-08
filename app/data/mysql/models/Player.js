@@ -1,4 +1,5 @@
 const { DataTypes, Model } = require("sequelize");
+
 let sequelize;
 
 if (process.env.DB === "mysql") {
@@ -13,21 +14,21 @@ Player.init(
   {
     id: {
       type: DataTypes.UUID,
-      primaryKey: true
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     dateOfRegister: {
       type: DataTypes.STRING,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
     sequelize,
     timestamps: false,
-    modelName: "Player"
+    modelName: "Player",
   }
 );
 

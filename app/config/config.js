@@ -1,8 +1,10 @@
-const mysql = {
+const mysqlConfig = {
   database: "devrest",
   username: "root",
   password: process.env.MYSQLPASS,
   host: "localhost",
 };
 
-module.exports = mysql;
+const dbToUse = process.env.DB === "mongodb" ? "mongodb" : "mysql";
+
+module.exports = { mysqlConfig, dbToUse };

@@ -17,22 +17,22 @@ Game.init(
   {
     id: {
       type: DataTypes.UUID,
-      primaryKey: true
+      primaryKey: true,
     },
     diceOne: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     diceTwo: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     result: {
-      type: DataTypes.BOOLEAN
-    }
+      type: DataTypes.BOOLEAN,
+    },
   },
   {
     sequelize,
     timestamps: false,
-    modelName: "Game"
+    modelName: "Game",
   }
 );
 

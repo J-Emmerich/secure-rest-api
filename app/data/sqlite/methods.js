@@ -6,7 +6,7 @@ async function create({ id, name, dateOfRegister }) {
     const newPlayer = await Player.create({
       id,
       name,
-      dateOfRegister
+      dateOfRegister,
     });
     console.log("***** register");
 
@@ -21,13 +21,13 @@ async function getAllPlayers({ short = false } = {}) {
   try {
     if (!short) {
       let players = await Player.findAll({
-        include: [{ model: Game }]
+        include: [{ model: Game }],
       });
       players = players.map((player) => player.toJSON());
       return players;
     }
     let players = await Player.findAll({
-      attributes: ["name", "id"]
+      attributes: ["name", "id"],
     });
 
     // Map each instance of the model to json to remove clutter in response
@@ -42,25 +42,25 @@ async function getAllPlayers({ short = false } = {}) {
 
 async function saveGame({ id, diceOne, diceTwo, result, playerId }) {
   try {
-    const game = await Game.create({
+    const newGame = await Game.create({
       id,
       diceOne,
       diceTwo,
       result,
-      PlayerId: playerId
+      PlayerId: playerId,
     });
 
     let games = await Game.findAll({
       where: {
-        PlayerId: playerId
-      }
+        PlayerId: playerId,
+      },
     });
     games = games.map((game) => game.toJSON());
     const victoryRate = await calcVictoryRate(games);
-    const player = await game.getPlayer();
+    const player = await newGame.getPlayer();
 
     // Insert victory rate and player in the response object
-    const gameToReturn = game.toJSON();
+    const gameToReturn = newGame.toJSON();
     gameToReturn.victoryRate = victoryRate;
     gameToReturn.player = player.toJSON().name;
     return gameToReturn;
@@ -72,7 +72,7 @@ async function saveGame({ id, diceOne, diceTwo, result, playerId }) {
 async function deleteGames(playerId) {
   const player = await Player.findOne({ where: { id: playerId } });
   const games = await player.getGames();
-  games.map(async (game) => await game.destroy({ truncate: true }));
+  games.map(async (game) => game.destroy({ truncate: true }));
   return player.toJSON();
 }
 

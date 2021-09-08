@@ -2,9 +2,10 @@
 // It import the database from
 // the connection-handler and exports a object with the methods.
 
-const { DB } = process.env;
-const database = require(`./${DB}/connection`);
-const methods = require(`./${DB}/methods`);
+const { dbToUse } = require("../config/config");
+
+const database = require(`./${dbToUse}/connection`);
+const methods = require(`./${dbToUse}/methods`);
 
 database.methods = methods;
 

@@ -22,7 +22,6 @@ mongoose.connection.on("disconnected", () => {
 
 process.on("SIGINT", async () => {
   await mongoose.disconnect();
-
   process.exit();
 });
 

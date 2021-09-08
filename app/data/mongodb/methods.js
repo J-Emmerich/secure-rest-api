@@ -85,7 +85,7 @@ async function getTopRanking({ reverse = false } = {}) {
     const order = reverse ? 1 : -1;
     const player = await Player.find({})
       .sort({
-        victoryRatePercentage: order
+        victoryRatePercentage: order,
       })
       .limit(1);
     return player;
@@ -102,5 +102,5 @@ module.exports = {
   saveGame,
   deleteGames,
   getAllGamesFromOnePlayer,
-  getTopRanking
+  getTopRanking,
 };
