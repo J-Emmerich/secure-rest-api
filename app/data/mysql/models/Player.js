@@ -1,5 +1,11 @@
 const { DataTypes, Model } = require("sequelize");
-const sequelize = require("../connection");
+let sequelize;
+
+if (process.env.DB === "mysql") {
+  sequelize = require("../connection");
+} else {
+  sequelize = require("../../sqlite/connection");
+}
 
 class Player extends Model {}
 
@@ -7,21 +13,21 @@ Player.init(
   {
     id: {
       type: DataTypes.UUID,
-      primaryKey: true,
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     dateOfRegister: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   },
   {
     sequelize,
     timestamps: false,
-    modelName: "Player",
+    modelName: "Player"
   }
 );
 

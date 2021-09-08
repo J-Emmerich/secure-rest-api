@@ -6,6 +6,14 @@ It has no idea which DB is being used.
 
 */
 
+/* 
+Methods: 
+methods.create(player);
+Create - Must save a new player, return the player created
+methods.updateName(id, name) Must return the updated
+methods.getAllPlayers({ short }) Must
+*/
+
 const { v4: uuidv4 } = require("uuid");
 const getCurrentTime = require("../helpers/get-current-time");
 const playerFabric = require("../data/entities/player-fabric");
@@ -87,5 +95,5 @@ module.exports = {
   getOnePlayerGamesInDB,
   makePlayerPlayOnceInDB,
   deletePlayerGamesFromDB,
-  getTopRankingPlayerFromDB,
+  getTopRankingPlayerFromDB
 };
