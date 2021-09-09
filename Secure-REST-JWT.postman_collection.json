@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "e9e037fd-f782-45e8-9804-ff0621f09fbd",
+		"name": "Secure-REST-JWT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add_Player",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Sigma X\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/players",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"players"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Player Name",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"55b38c06-a10b-4df0-84e4-b2425751d672\",\r\n    \"name\": \"Ginger Delta\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/players",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"players"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Play one game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/players/:id/games",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"players",
+						":id",
+						"games"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "55b38c06-a10b-4df0-84e4-b2425751d672"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all games",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/players/:id/games",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"players",
+						":id",
+						"games"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "55b38c06-a10b-4df0-84e4-b2425751d672"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All players",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/players",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"players"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "One player games",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/players/:id/games",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"players",
+						":id",
+						"games"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "140ec071-24cf-4d96-a4dc-dec7c4cadfae"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Victory Rate of All Players",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/players/ranking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"players",
+						"ranking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Player that is winning",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/players/ranking/winner",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"players",
+						"ranking",
+						"winner"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Player that is losing",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/players/ranking/loser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"players",
+						"ranking",
+						"loser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
