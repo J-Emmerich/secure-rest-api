@@ -2,6 +2,12 @@ const { Player, Game } = require("../mysql/models");
 const calcVictoryRate = require("../../helpers/calc-victory-rate");
 const assignVictoryRateToPlayer = require("../../helpers/assign-victory-rate");
 
+async function isUniqueName(name) {
+  // Returns boolean
+  const player = await Player.findOne({ where: { name: name } });
+  return player === null ? true : false;
+}
+
 async function create({ id, name, dateOfRegister }) {
   try {
     const newPlayer = await Player.create({
@@ -59,7 +65,7 @@ async function getAllPlayers({ short = false } = {}) {
     players = Promise.all(players);
     return players;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
@@ -78,25 +84,33 @@ async function saveGame({ id, diceOne, diceTwo, result, playerId }) {
         PlayerId: playerId
       }
     });
+    if (games === null) throw Error("No such player");
+    const player = await Player.findByPk(playerId);
     games = games.map((game) => game.toJSON());
+
     const victoryRate = await calcVictoryRate(games);
 
-    const player = await Player.findByPk(playerId);
     // Insert victory rate and player in the response object
     const gameToReturn = newGame.toJSON();
     gameToReturn.victoryRate = victoryRate;
     gameToReturn.player = player.toJSON().name;
     return gameToReturn;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
 async function deleteGames(playerId) {
-  const player = await Player.findOne({ where: { id: playerId } });
-  const games = await player.getGames();
-  games.map(async (game) => game.destroy({ truncate: true }));
-  return player.toJSON();
+  try {
+    const player = await Player.findOne({ where: { id: playerId } });
+    if (player === null) throw Error("No such player");
+    if (player === null) throw Error("No such player");
+    const games = await player.getGames();
+    games.map(async (game) => game.destroy({ truncate: true }));
+    return player.toJSON();
+  } catch (err) {
+    return err;
+  }
 }
 
 async function getTopRanking({ reverse = false } = {}) {
@@ -111,19 +125,24 @@ async function getTopRanking({ reverse = false } = {}) {
 
     return topPlayer;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
 async function getAllGamesFromOnePlayer(playerId) {
-  let player = await Player.findByPk(playerId, { include: Game });
-  const victoryRate = await calcVictoryRate(player.Games);
-  const victory = {
-    victoryRatePercentage: victoryRate
-  };
-  player = player.toJSON();
-  const playerToReturn = { ...player, ...victory };
-  return playerToReturn;
+  try {
+    let player = await Player.findByPk(playerId, { include: Game });
+    if (player === null) throw Error("No such player");
+    const victoryRate = await calcVictoryRate(player.Games);
+    const victory = {
+      victoryRatePercentage: victoryRate
+    };
+    player = player.toJSON();
+    const playerToReturn = { ...player, ...victory };
+    return playerToReturn;
+  } catch (err) {
+    return err;
+  }
 }
 
 module.exports = {
@@ -133,5 +152,6 @@ module.exports = {
   deleteGames,
   updateName,
   getTopRanking,
-  getAllGamesFromOnePlayer
+  getAllGamesFromOnePlayer,
+  isUniqueName
 };

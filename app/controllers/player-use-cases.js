@@ -12,25 +12,31 @@ const { play } = require("../data/entities/game-fabric");
 
 async function createPlayerInDB(methods, name) {
   try {
-    // Find player with same name with a function find
-    const id = uuidv4();
-    const dateOfRegister = await getCurrentTime();
-    let player = await playerFabric({ id, name, dateOfRegister });
+    const isUniquePlayer = await methods.isUniqueName(name);
+    if (isUniquePlayer) {
+      const id = uuidv4();
+      const dateOfRegister = await getCurrentTime();
+      let player = await playerFabric({ id, name, dateOfRegister });
+      if (player instanceof Error) throw player;
 
-    if (!(player instanceof Error)) {
       player = await methods.create(player);
-      return player;
-    }
-    return player.message;
+      return player; // <--- This is an error instance throw by playerFabric
+    } else throw Error("Name is not unique");
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
 async function updatePlayerNameInDB(methods, id, name) {
-  // Name validation function
-  const player = await methods.updateName(id, name);
-  return player;
+  try {
+    const isUniquePlayer = await methods.isUniqueName(name);
+    if (isUniquePlayer) {
+      const player = await methods.updateName(id, name);
+      return player;
+    } else throw Error("Name to update is not unique");
+  } catch (err) {
+    return err;
+  }
 }
 
 async function getPlayersFromDB(methods, { short = false } = {}) {
@@ -38,25 +44,27 @@ async function getPlayersFromDB(methods, { short = false } = {}) {
     const players = await methods.getAllPlayers({ short });
     return players;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
 async function getOnePlayerGamesInDB(methods, id) {
   try {
     const playerGames = await methods.getAllGamesFromOnePlayer(id);
+    if (playerGames instanceof Error) throw Error("No such player");
     return playerGames;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 async function makePlayerPlayOnceInDB(methods, playerId) {
   try {
     let game = await play(playerId);
-    game = await methods.saveGame(game); // DB handle it accordingly (mongo save in same document, mysql in two tables with foreign key)
+    game = await methods.saveGame(game);
+    if (game instanceof Error) throw Error("No such player");
     return game;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
@@ -65,7 +73,7 @@ async function deletePlayerGamesFromDB(methods, playerId) {
     const isDeleted = await methods.deleteGames(playerId);
     return isDeleted;
   } catch (err) {
-    return err.message;
+    return err;
   }
 }
 
