@@ -7,7 +7,7 @@ async function create({ id, name, dateOfRegister }) {
     const newPlayer = await Player.create({
       id,
       name,
-      dateOfRegister,
+      dateOfRegister
     });
     return newPlayer.toJSON();
   } catch (err) {
@@ -32,7 +32,7 @@ async function getAllPlayers({ short = false } = {}) {
     if (short) {
       let players = await Player.findAll({
         include: [{ model: Game, attributes: ["result"] }],
-        attributes: ["id", "name"],
+        attributes: ["id", "name"]
       });
       players = players.map((player) => player.toJSON());
       // calculate victory rate and assign to player.
@@ -46,10 +46,11 @@ async function getAllPlayers({ short = false } = {}) {
       return players;
     }
     let players = await Player.findAll({
-      include: Game,
+      include: Game
     });
 
     // Assign victory rate to the player
+    players = players.map((player) => player.toJSON());
     players = players.map(async (player) => {
       player = await assignVictoryRateToPlayer(player);
       return player;
@@ -69,13 +70,13 @@ async function saveGame({ id, diceOne, diceTwo, result, playerId }) {
       diceOne,
       diceTwo,
       result,
-      PlayerId: playerId,
+      PlayerId: playerId
     });
 
     let games = await Game.findAll({
       where: {
-        PlayerId: playerId,
-      },
+        PlayerId: playerId
+      }
     });
     games = games.map((game) => game.toJSON());
     const victoryRate = await calcVictoryRate(games);
@@ -118,7 +119,7 @@ async function getAllGamesFromOnePlayer(playerId) {
   let player = await Player.findByPk(playerId, { include: Game });
   const victoryRate = await calcVictoryRate(player.Games);
   const victory = {
-    victoryRatePercentage: victoryRate,
+    victoryRatePercentage: victoryRate
   };
   player = player.toJSON();
   const playerToReturn = { ...player, ...victory };
@@ -132,5 +133,5 @@ module.exports = {
   deleteGames,
   updateName,
   getTopRanking,
-  getAllGamesFromOnePlayer,
+  getAllGamesFromOnePlayer
 };
