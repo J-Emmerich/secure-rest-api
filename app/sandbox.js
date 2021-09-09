@@ -6,10 +6,10 @@ const playerControler = controler(methods);
 // Methods to test in sandbox context:
 const req = {
   params: {
-    id: "aef3cbb2-7a5d-497c-bf54-221095934ed0"
+    id: "563dfac7-7176-4b46-acfe-91ec39cxcx2334c4"
   },
   body: {
-    name: "Candy Sigma"
+    name: "e Sigma"
   }
 };
 
@@ -32,4 +32,4 @@ res.status = status;
 
 // playerControler.getAllPlayersRanking(req, res);
 // playerControler.getAllPlayers(req, res);
-// playerControler.getOnePlayerGames(req, res);
+playerControler.getOnePlayerGames(req, res);
