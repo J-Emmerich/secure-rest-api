@@ -1,16 +1,8 @@
-const { connect } = require("mongoose");
 const mysql2 = require("mysql2/promise");
 const Sequelize = require("sequelize");
 const { credentials } = require("../../config/config");
 
-const {
-  username: user,
-  port: portdb,
-  database,
-  host,
-  password,
-  initMysql,
-} = credentials;
+const { username: user, database, host, password } = credentials;
 
 const mysql = new Sequelize(database, user, password, {
   host,
@@ -18,6 +10,12 @@ const mysql = new Sequelize(database, user, password, {
   define: {
     freezeTableName: true,
   },
+});
+
+process.on("SIGINT", async () => {
+  await mysql.close();
+  console.log("Disconnected from mysql");
+  process.exit();
 });
 
 module.exports = mysql;

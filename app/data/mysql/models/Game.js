@@ -1,15 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
-
-// conditional added to run both dialects with same models.
-
-let sequelize;
-
-if (process.env.DB === "mysql") {
-  sequelize = require("../connection");
-} else {
-  sequelize = require("../../sqlite/connection");
-}
-// const { sequelize } = require("../../database-access");
+const sequelize = require("../connection");
 
 class Game extends Model {}
 

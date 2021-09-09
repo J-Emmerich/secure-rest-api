@@ -5,9 +5,12 @@ const credentials = {
   password: "1234",
   host: "localhost",
   database: "onethatdoesnotexist",
-  port: "27007", // <-- Only if you're using mongodb
+  dbPort: "23007", // <-- Only if you're using mongodb
 };
 
-const dbToUse = process.env.NODE_ENV === "mysql" ? "mysql" : "mongodb";
+const dbToUse = process.env.DB === "mysql" ? "mysql" : "mongodb";
 
-module.exports = { credentials, dbToUse };
+// Server config
+const PORT = 3001;
+
+module.exports = { credentials, dbToUse, PORT };

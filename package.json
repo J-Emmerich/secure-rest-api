@@ -1,7 +1,7 @@
 {
   "name": "secure-rest-sqlite",
   "version": "1.0.0",
-  "description": "",
+  "description": "1. Clone this repository.\r 2. run NPM init to install the dependencies. \r 3. You can run this api with MongoDB or Mysql. \r ### MongoDB",
   "main": "index.js",
   "scripts": {
     "start": "node app/app.js",
@@ -41,5 +41,13 @@
     "prettier": "^2.3.2",
     "sequelize-cli": "^6.2.0",
     "sqlite3": "^5.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/J-Emmerich/secure-rest-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/J-Emmerich/secure-rest-api/issues"
+  },
+  "homepage": "https://github.com/J-Emmerich/secure-rest-api#readme"
 }

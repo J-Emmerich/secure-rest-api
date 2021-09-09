@@ -22,7 +22,7 @@ module.exports = (methods) => {
       if (player instanceof Error) throw player;
       res.status(201).json(player);
     } catch (err) {
-      res.status(403).json(err.message);
+      res.status(400).json(err.message);
     }
   }
 
@@ -43,7 +43,7 @@ module.exports = (methods) => {
       if (player instanceof Error) throw player;
       res.status(200).json(player);
     } catch (err) {
-      res.status(403).json(err.message);
+      res.status(400).json(err.message);
     }
   }
 
@@ -54,7 +54,7 @@ module.exports = (methods) => {
       if (player instanceof Error) throw Error("No such player");
       res.status(200).json(player);
     } catch (err) {
-      res.status(403).json(err.message);
+      res.status(400).json(err.message);
     }
   }
 
@@ -65,7 +65,7 @@ module.exports = (methods) => {
       if (playerGame instanceof Error) throw Error("No such player");
       res.status(201).json(playerGame);
     } catch (err) {
-      res.status(403).json(err.message);
+      res.status(400).json(err.message);
     }
   }
 
@@ -76,7 +76,7 @@ module.exports = (methods) => {
       if (result instanceof Error) throw Error("No such player");
       res.status(204).json(result);
     } catch (err) {
-      res.status(403).json(err.message);
+      res.status(400).json(err.message);
     }
   }
 
