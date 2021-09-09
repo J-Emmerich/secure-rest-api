@@ -3,11 +3,11 @@ const methods = require("./controllers/player-controller");
 // Methods to test in sandbox context:
 const req = {
   params: {
-    id: "ea727bd7-63a9-4c52-b51d-0b6ed8ae8614",
+    id: "aef3cbb2-7a5d-497c-bf54-221095934ed0"
   },
   body: {
-    name: "Sigma X",
-  },
+    name: "Ginger Delta"
+  }
 };
 
 function status(param) {
@@ -16,13 +16,17 @@ function status(param) {
 }
 
 const res = {
-  json: (param) => console.log(param),
+  json: (param) => console.log(param)
 };
 
 res.status = status;
 
 // methods.registerNewPlayer(req, res);
-methods.getAllPlayers(req, res);
-// methods.getAllPlayersRanking(req, res);
 // methods.playOneGame(req, res);
 // methods.deletePlayerGames(req, res);
+
+// To Test
+
+methods.getAllPlayersRanking(req, res);
+// methods.getAllPlayers(req, res);
+// methods.getOnePlayerGames(req, res);

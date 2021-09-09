@@ -10,8 +10,8 @@ const {
   updatePlayerNameInDB,
   makePlayerPlayOnceInDB,
   deletePlayerGamesFromDB,
-  getTopRankingPlayerFromDB,
-} = require("./player-data-controller");
+  getTopRankingPlayerFromDB
+} = require("./player-use-cases");
 
 async function registerNewPlayer(req, res) {
   try {
@@ -103,5 +103,5 @@ module.exports = {
   deletePlayerGames,
   getAllPlayersRanking,
   getPlayerLowerVictoryRate,
-  getPlayerHigherVictoryRate,
+  getPlayerHigherVictoryRate
 };
