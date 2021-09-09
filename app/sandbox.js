@@ -1,13 +1,16 @@
-const methods = require("./controllers/player-controller");
+const controler = require("./controllers/player-controller");
 
+const { methods } = require("./data/database-access");
+
+const playerControler = controler(methods);
 // Methods to test in sandbox context:
 const req = {
   params: {
-    id: "ea727bd7-63a9-4c52-b51d-0b6ed8ae8614",
+    id: "563dfac7-7176-4b46-acfe-91ec39cxcx2334c4"
   },
   body: {
-    name: "Sigma X",
-  },
+    name: "e Sigma"
+  }
 };
 
 function status(param) {
@@ -16,13 +19,17 @@ function status(param) {
 }
 
 const res = {
-  json: (param) => console.log(param),
+  json: (param) => console.log(param)
 };
 
 res.status = status;
 
-// methods.registerNewPlayer(req, res);
-methods.getAllPlayers(req, res);
-// methods.getAllPlayersRanking(req, res);
-// methods.playOneGame(req, res);
-// methods.deletePlayerGames(req, res);
+// playerControler.registerNewPlayer(req, res);
+// playerControler.playOneGame(req, res);
+// playerControler.deletePlayerGames(req, res);
+
+// To Test
+
+// playerControler.getAllPlayersRanking(req, res);
+// playerControler.getAllPlayers(req, res);
+playerControler.getOnePlayerGames(req, res);

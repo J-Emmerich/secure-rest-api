@@ -57,6 +57,8 @@ async function saveGame(gameToSave) {
       { $push: { games: gameToSave } },
       { useFindAndModify: false, new: true }
     );
+    if (player === null) throw Error("No such player");
+
     const victoryRate = await calcVictoryRate(player.games);
 
     player.victoryRatePercentage = victoryRate;
@@ -70,6 +72,7 @@ async function saveGame(gameToSave) {
 async function deleteGames(playerId) {
   try {
     const player = await Player.findOne({ id: playerId });
+    if (player === null) throw Error("No such player");
     player.victoryRatePercentage = 0;
     player.games = [];
     await player.save();
@@ -81,6 +84,7 @@ async function deleteGames(playerId) {
 async function getAllGamesFromOnePlayer(playerId) {
   try {
     let playerGames = await Player.findOne({ id: playerId });
+    if (playerGames === null) throw Error("No such player");
     playerGames = playerGames.games;
     return playerGames;
   } catch (err) {
@@ -93,7 +97,7 @@ async function getTopRanking({ reverse = false } = {}) {
     const order = reverse ? 1 : -1;
     const player = await Player.find({})
       .sort({
-        victoryRatePercentage: order,
+        victoryRatePercentage: order
       })
       .limit(1);
     return player;
@@ -110,5 +114,5 @@ module.exports = {
   saveGame,
   deleteGames,
   getAllGamesFromOnePlayer,
-  getTopRanking,
+  getTopRanking
 };

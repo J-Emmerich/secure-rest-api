@@ -1,7 +1,6 @@
 // This is the entry point of the data-layer.
-// It import the database from
-// the connection-handler and exports a object with the methods.
-// It works as an adapter to the DB methods.
+// It functions as a sort of adapter to the DB methods.
+// It import the database from the connection-handler and exports a object with the methods.
 
 const { dbToUse } = require("../config/config");
 

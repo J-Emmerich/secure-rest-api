@@ -1,27 +1,24 @@
 const express = require("express");
-const {
-  registerNewPlayer,
-  getAllPlayers,
-  updateOnePlayerName,
-  getOnePlayerGames,
-  playOneGame,
-  deletePlayerGames,
-  getAllPlayersRanking,
-  getPlayerLowerVictoryRate,
-  getPlayerHigherVictoryRate,
-} = require("../controllers/player-controller");
+const controler = require("../controllers/player-controller");
 
-const router = express.Router();
+// Router is exported as a function to accept Database Methods in parameter
+const playerRouter = (databaseMethods) => {
+  const router = express.Router();
 
-router.get("/", getAllPlayers);
-router.put("/", updateOnePlayerName);
-router.post("/", registerNewPlayer);
+  const playerControler = controler(databaseMethods);
 
-router.get("/:id/games", getOnePlayerGames);
-router.post("/:id/games", playOneGame);
-router.delete("/:id/games", deletePlayerGames);
+  router.get("/", playerControler.getAllPlayers);
+  router.put("/", playerControler.updateOnePlayerName);
+  router.post("/", playerControler.registerNewPlayer);
 
-router.get("/ranking", getAllPlayersRanking);
-router.get("/ranking/winner", getPlayerHigherVictoryRate);
-router.get("/ranking/loser", getPlayerLowerVictoryRate);
-module.exports = router;
+  router.get("/:id/games", playerControler.getOnePlayerGames);
+  router.post("/:id/games", playerControler.playOneGame);
+  router.delete("/:id/games", playerControler.deletePlayerGames);
+
+  router.get("/ranking", playerControler.getAllPlayersRanking);
+  router.get("/ranking/winner", playerControler.getPlayerHigherVictoryRate);
+  router.get("/ranking/loser", playerControler.getPlayerLowerVictoryRate);
+
+  return router;
+};
+module.exports = playerRouter;
