@@ -13,3 +13,5 @@
 
 5. If the database is not already created run `npm run mysql`
 6. Start the app with the command `DB=mysql npm start`
+
+### Have fun!
