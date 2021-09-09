@@ -1,4 +1,3 @@
-process.stdin.resume();
 const mongoose = require("mongoose");
 const { credentials } = require("../../config/config");
 
@@ -17,10 +16,10 @@ const options = {
 mongoose.connect(uri, options);
 
 mongoose.connection.on("connected", () => {
-  console.log("Connected to Mongoose");
+  console.log("Connected to MongoDB");
 });
 mongoose.connection.on("disconnected", () => {
-  console.log("Disconnected from Mongoose");
+  console.log("Disconnected from MongoDB");
 });
 
 // Disconnect from mongoose when server is killed

@@ -1,12 +1,5 @@
 const { DataTypes, Model } = require("sequelize");
-
-let sequelize;
-
-if (process.env.DB === "mysql") {
-  sequelize = require("../connection");
-} else {
-  sequelize = require("../../sqlite/connection");
-}
+const sequelize = require("../connection");
 
 class Player extends Model {}
 
