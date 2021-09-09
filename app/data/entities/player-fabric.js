@@ -2,7 +2,7 @@
 
 const {
   InvalidTypeError,
-  RequiredParameterError
+  RequiredParameterError,
 } = require("../../helpers/error");
 
 function isString(rawId) {
@@ -35,7 +35,7 @@ async function makePlayer({ id, name = "anonymous", dateOfRegister } = {}) {
     const player = {
       id: validId,
       name: validName,
-      dateOfRegister: validTime
+      dateOfRegister: validTime,
     };
     return Object.freeze(player);
   } catch (err) {

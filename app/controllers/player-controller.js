@@ -10,7 +10,7 @@ const {
   updatePlayerNameInDB,
   makePlayerPlayOnceInDB,
   deletePlayerGamesFromDB,
-  getTopRankingPlayerFromDB
+  getTopRankingPlayerFromDB,
 } = require("./player-use-cases");
 
 // Export as a function. Receives the DB methods following DI rules
@@ -22,7 +22,7 @@ module.exports = (methods) => {
       if (player instanceof Error) throw player;
       res.status(201).json(player);
     } catch (err) {
-      res.status(403).json(err);
+      res.status(403).json(err.message);
     }
   }
 
@@ -31,7 +31,7 @@ module.exports = (methods) => {
       const players = await getPlayersFromDB(methods);
       res.status(200).json(players);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json(err.message);
     }
   }
 
@@ -43,7 +43,7 @@ module.exports = (methods) => {
       if (player instanceof Error) throw player;
       res.status(200).json(player);
     } catch (err) {
-      res.status(403).json(err);
+      res.status(403).json(err.message);
     }
   }
 
@@ -54,7 +54,7 @@ module.exports = (methods) => {
       if (player instanceof Error) throw Error("No such player");
       res.status(200).json(player);
     } catch (err) {
-      res.status(403).json(err);
+      res.status(403).json(err.message);
     }
   }
 
@@ -65,7 +65,7 @@ module.exports = (methods) => {
       if (playerGame instanceof Error) throw Error("No such player");
       res.status(201).json(playerGame);
     } catch (err) {
-      res.status(403).json(err);
+      res.status(403).json(err.message);
     }
   }
 
@@ -76,7 +76,7 @@ module.exports = (methods) => {
       if (result instanceof Error) throw Error("No such player");
       res.status(204).json(result);
     } catch (err) {
-      res.status(403).json(err);
+      res.status(403).json(err.message);
     }
   }
 
@@ -85,7 +85,7 @@ module.exports = (methods) => {
       const playerRankings = await getPlayersFromDB(methods, { short: true });
       res.status(200).json(playerRankings);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json(err.message);
     }
   }
 
@@ -94,17 +94,17 @@ module.exports = (methods) => {
       const topRanking = await getTopRankingPlayerFromDB(methods);
       res.status(200).json(topRanking);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json(err.message);
     }
   }
   async function getPlayerLowerVictoryRate(req, res) {
     try {
       const lowerRanking = await getTopRankingPlayerFromDB(methods, {
-        reverse: true
+        reverse: true,
       });
       res.status(200).json(lowerRanking);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json(err.message);
     }
   }
 
@@ -117,6 +117,6 @@ module.exports = (methods) => {
     deletePlayerGames,
     getAllPlayersRanking,
     getPlayerLowerVictoryRate,
-    getPlayerHigherVictoryRate
+    getPlayerHigherVictoryRate,
   };
 };

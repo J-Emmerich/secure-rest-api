@@ -18,10 +18,10 @@ async function createPlayerInDB(methods, name) {
       const dateOfRegister = await getCurrentTime();
       let player = await playerFabric({ id, name, dateOfRegister });
       if (player instanceof Error) throw player;
-
       player = await methods.create(player);
       return player; // <--- This is an error instance throw by playerFabric
-    } else throw Error("Name is not unique");
+    }
+    throw Error("Name is not unique");
   } catch (err) {
     return err;
   }
@@ -33,7 +33,8 @@ async function updatePlayerNameInDB(methods, id, name) {
     if (isUniquePlayer) {
       const player = await methods.updateName(id, name);
       return player;
-    } else throw Error("Name to update is not unique");
+    }
+    throw Error("Name to update is not unique");
   } catch (err) {
     return err;
   }
@@ -93,5 +94,5 @@ module.exports = {
   getOnePlayerGamesInDB,
   makePlayerPlayOnceInDB,
   deletePlayerGamesFromDB,
-  getTopRankingPlayerFromDB
+  getTopRankingPlayerFromDB,
 };

@@ -4,9 +4,8 @@
 
 const { dbToUse } = require("../config/config");
 
-const database = require(`./${dbToUse}/connection`);
-const methods = require(`./${dbToUse}/methods`);
-
-database.methods = methods;
+const database = {};
+database.connection = require(`./${dbToUse}/connection`);
+database.methods = require(`./${dbToUse}/methods`);
 
 module.exports = database;

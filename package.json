@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node app/app.js",
     "dev": "nodemon app/app.js",
+    "mysql": "node app/data/mysql/init.js",
     "test": "jest --verbose=true",
     "lint": "eslint --fix --ext .js,.jsx ."
   },

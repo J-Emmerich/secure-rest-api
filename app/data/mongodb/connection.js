@@ -1,16 +1,21 @@
 process.stdin.resume();
 const mongoose = require("mongoose");
+const { credentials } = require("../../config/config");
 
-const user = process.env.USER;
-const password = process.env.PASSWORD;
+let uri;
+if (credentials.username === "") {
+  uri = `mongodb://localhost:${credentials.port}/${credentials.database}`;
+} else {
+  uri = `mongodb://${credentials.username}:${credentials.password}@${credentials.host}:${credentials.port}/${credentials.database}`;
+}
 
-const uri = `mongodb+srv://${user}:${password}@base.b4wyc.mongodb.net/Base?retryWrites=true&w=majority`;
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 
 mongoose.connect(uri, options);
+
 mongoose.connection.on("connected", () => {
   console.log("Connected to Mongoose");
 });
