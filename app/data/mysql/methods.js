@@ -21,6 +21,12 @@ async function create({ id, name, dateOfRegister }) {
   }
 }
 
+async function findById(id) {
+  const player = await Player.findByPk(id);
+  console.log(player);
+  return player !== null;
+}
+
 async function updateName(id, toUpdate) {
   try {
     let player = await Player.findByPk(id);
@@ -154,4 +160,5 @@ module.exports = {
   getTopRanking,
   getAllGamesFromOnePlayer,
   isUniqueName,
+  findById,
 };

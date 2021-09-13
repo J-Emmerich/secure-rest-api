@@ -29,12 +29,13 @@ async function createPlayerInDB(methods, name) {
 
 async function updatePlayerNameInDB(methods, id, name) {
   try {
+    const isPlayerInDb = await methods.findById(id);
     const isUniquePlayer = await methods.isUniqueName(name);
-    if (isUniquePlayer) {
+    if (isUniquePlayer && isPlayerInDb) {
       const player = await methods.updateName(id, name);
       return player;
     }
-    throw Error("Name to update is not unique");
+    throw Error("Name to update is not unique or not in database");
   } catch (err) {
     return err;
   }

@@ -3,7 +3,7 @@ const calcVictoryRate = require("../../helpers/calc-victory-rate");
 
 async function isUniqueName(name) {
   const isUnique = await Player.findOne({ name });
-  console.log(isUnique);
+
   return isUnique === null;
 }
 
@@ -46,10 +46,10 @@ async function updateName(id, toUpdate) {
 }
 
 // Return 1 player
-async function findOne(id) {
+async function findById(id) {
   try {
-    const player = await Player.find({ id });
-    return player;
+    const player = await Player.find({ id: id });
+    return player !== null;
   } catch (err) {
     return err;
   }
@@ -116,7 +116,7 @@ module.exports = {
   create,
   getAllPlayers,
   updateName,
-  findOne,
+  findById,
   saveGame,
   deleteGames,
   getAllGamesFromOnePlayer,
