@@ -20,6 +20,8 @@ module.exports = (methods) => {
       const { name } = req.body;
       const player = await createPlayerInDB(methods, name);
       if (player instanceof Error) throw player;
+      // Generate Token
+      // Hash Password
       res.status(201).json(player);
     } catch (err) {
       res.status(400).json(err.message);
