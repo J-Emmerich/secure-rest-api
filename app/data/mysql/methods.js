@@ -23,7 +23,8 @@ async function create({ id, name, dateOfRegister }) {
 
 async function findById(id) {
   const player = await Player.findByPk(id);
-  return player === null;
+  console.log(player);
+  return player !== null;
 }
 
 async function updateName(id, toUpdate) {

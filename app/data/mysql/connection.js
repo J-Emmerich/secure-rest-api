@@ -1,4 +1,3 @@
-const mysql2 = require("mysql2/promise");
 const Sequelize = require("sequelize");
 const { credentials } = require("../../config/config");
 

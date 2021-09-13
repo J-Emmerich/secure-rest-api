@@ -8,6 +8,16 @@
 		{
 			"name": "Add_Player",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhlbGxvV29ybGQiLCJpYXQiOjE2MzE1MjM2NTQsImV4cCI6MTYzMTUyNzI1NH0.oCIWhZuVVZg8fYmyfxYMSYTYq204wQiLE4qi3muB69Y",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -37,6 +47,16 @@
 		{
 			"name": "Update Player Name",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhlbGxvV29ybGQiLCJpYXQiOjE2MzE1MjM2NTQsImV4cCI6MTYzMTUyNzI1NH0.oCIWhZuVVZg8fYmyfxYMSYTYq204wQiLE4qi3muB69Y",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [
 					{
@@ -47,7 +67,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"55b38c06-a10b-4df0-84e4-b2425751d672\",\r\n    \"name\": \"Ginger Delta\"\r\n}"
+					"raw": "{\r\n    \"id\": \"b41a42a4-d83e-42b4-bae7-e3bad1a84eb0\",\r\n    \"name\": \"Ginger Delta\"\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:3001/players",
@@ -66,6 +86,16 @@
 		{
 			"name": "Play one game",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhlbGxvV29ybGQiLCJpYXQiOjE2MzE1MjI4MzIsImV4cCI6MTYzMTUyNjQzMn0.0yoSRma6DhYrd5rPjRSRw3n5FkQMjQI5Oi_I5KSkgjc",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"url": {
@@ -83,7 +113,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "55b38c06-a10b-4df0-84e4-b2425751d672"
+							"value": "b41a42a4-d83e-42b4-bae7-e3bad1a84eb0"
 						}
 					]
 				}
@@ -93,6 +123,16 @@
 		{
 			"name": "Delete all games",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhlbGxvV29ybGQiLCJwYXNzd29yZCI6IlFXRVJUWUZvcmV2ZXIiLCJpYXQiOjE2MzE1MTk0NzZ9.YNL8Bdow7YwLAjBy46CheANzdLG-VssofIEjSBUZIGk",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -110,7 +150,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "55b38c06-a10b-4df0-84e4-b2425751d672"
+							"value": "8cdeeffd-44b6-4660-ad02-1cfcdf0de237"
 						}
 					]
 				}
@@ -120,6 +160,16 @@
 		{
 			"name": "All players",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsIanR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhlbGxvV29ybGQiLCJpYXQiOjE2MzE1MjM2NTQsImV4cCI6MTYzMTUyNzI1NH0.oCIWhZuVVZg8fYmyfxYMSYTYq204wQiLE4qi3muB69Y",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -207,6 +257,16 @@
 		{
 			"name": "Player that is losing",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhlbGxvV29ybGQiLCJpYXQiOjE2MzE1MjM2NTQsImV4cCI6MTYzMTUyNzI1NH0.oCIWhZuVVZg8fYmyfxYMSYTYq204wQiLE4qi3muB69Y",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -220,6 +280,35 @@
 						"players",
 						"ranking",
 						"loser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"HelloWorld\",\r\n    \"password\": \"QWERTYForever\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"login"
 					]
 				}
 			},

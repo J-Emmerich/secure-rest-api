@@ -1,8 +1,8 @@
 // Define your DB credentials here
 
 const credentials = {
-  username: "",
-  password: "",
+  username: "root",
+  password: "1234",
   host: "localhost",
   database: "onethatdoesnotexist",
   dbPort: "23007", // <-- Only if you're using mongodb

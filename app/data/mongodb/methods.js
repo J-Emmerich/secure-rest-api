@@ -3,7 +3,7 @@ const calcVictoryRate = require("../../helpers/calc-victory-rate");
 
 async function isUniqueName(name) {
   const isUnique = await Player.findOne({ name });
-  console.log("here", isUnique);
+
   return isUnique === null;
 }
 

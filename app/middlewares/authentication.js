@@ -4,15 +4,15 @@ const { secret, adminUser } = require("../config/auth");
 const getToken = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    const token = authorization.toString().substring(7);
-    if (authorization && token) {
-      const auth = jwt.verify(token, secret);
+    if (authorization) {
+      const token = authorization.toString().substring(7);
+      jwt.verify(token, secret);
       next();
     } else {
-      throw Error("Not Authorized");
+      throw Error("Insert Authorization token");
     }
   } catch (error) {
-    next(error);
+    res.status(401).send(error.message);
   }
 };
 
@@ -30,7 +30,7 @@ const authenticateUser = async (req, res, next) => {
       throw Error("Username or password are not correct!");
     }
   } catch (error) {
-    next(error.message);
+    res.status(401).send(error.message);
   }
 };
 
